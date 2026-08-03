@@ -6,7 +6,7 @@ sources:
     tables:
       - name: listings
         identifier: raw_listings
-
+        
       - name: hosts
         identifier: raw_hosts
 
