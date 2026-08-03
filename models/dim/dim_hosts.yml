@@ -14,5 +14,5 @@ models:
         data_tests:
           - accepted_values:
               arguments:
-                values: ['t', 'f'] 
+                values: ['t', 'f']
 
