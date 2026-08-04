@@ -11,7 +11,7 @@ user:
       retry_on_database_errors: true
       role: ACCOUNTADMIN
       schema: Dev
-      threads: 6
+      threads: 4
       type: snowflake
       user: Ramya
       warehouse: COMPUTE_WH
