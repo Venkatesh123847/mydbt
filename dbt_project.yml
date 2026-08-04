@@ -49,3 +49,9 @@ models:
       +materialized: table
     src:
       +materialized: ephemeral
+    fct:
+      +tags: ['fact']
+
+
+vars:
+  user_name: default_user_name_for_this_project      
