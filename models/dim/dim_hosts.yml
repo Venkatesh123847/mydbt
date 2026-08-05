@@ -1,44 +1,70 @@
+version: 2
+
 models:
   - name: dim_hosts_cleansed
     description: cleansed table for the airbnb hosts
+    latest_version: 2
+
+    config:
+      contract:
+        enforced: true
+
+    versions:
+      - v: 1
+        defined_in: dim_hosts_cleansed
+        deprecation_date: 2030-01-01
+      - v: 2
+        defined_in: dim_hosts_cleansed_v2
+
     columns:
       - name: host_id
-        description: the id of host . this is primary key 
+        description: the id of host . this is primary key
+        data_type: integer
         data_tests:
           - not_null
           - unique
 
       - name: host_name
         description: the name of host
+        data_type: string
         data_tests:
           - not_null
 
       - name: is_superhost
         description: define whether the host is superhost
+        data_type: string
         data_tests:
           - accepted_values:
               arguments:
                 values: ['t', 'f']
 
+      - name: created_at
+        description: Date and time the host record was created
+        data_type: timestamp
+
+      - name: updated_at
+        description: Date and time the host record was last updated
+        data_type: timestamp
+
   - name: dim_listings_with_hosts
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_row_count_to_equal_other_table:
-          arguments: 
+          arguments:
             compare_model: source('airbnb', 'listings')
 
     columns:
       - name: price
-        tests:
+        data_tests:
           - dbt_expectations.expect_column_values_to_be_of_type:
-              arguments: 
-                  column_type: number
+              arguments:
+                column_type: number
           - dbt_expectations.expect_column_quantile_values_to_be_between:
-              arguments: 
+              arguments:
                 quantile: .99
                 min_value: 50
-                max_value: 500      
+                max_value: 500
           - dbt_expectations.expect_column_max_to_be_between:
               arguments:
-                  max_value: 5000
+                max_value: 5000
               config:
-                severity: warn    
+                severity: warn

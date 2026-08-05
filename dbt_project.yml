@@ -54,4 +54,8 @@ models:
 
 
 vars:
-  user_name: default_user_name_for_this_project      
+  user_name: default_user_name_for_this_project    
+
+tests:
+    +store_failures: true
+    +schema: _test_failures
