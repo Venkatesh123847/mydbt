@@ -1,33 +1,35 @@
 user:
-  outputs:
+   outputs:
     default:
-      account: WGZXPME-SR81436
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
       auth_type: password
       client_session_keep_alive: false
       connect_retries: 3
       connect_timeout: 30
       database: AIRBNB
-      password: Ramyanikhitha@123
+      password: "{{ env_var('DBT_PASSWORD') }}"
       retry_on_database_errors: true
       role: ACCOUNTADMIN
-      schema: Dev
+      schema: "DBT_{{ env_var('DBT_ENV_NAME') | upper | trim }}"
       threads: 4
       type: snowflake
-      user: Ramya
-      warehouse: COMPUTE_WH 
+      user: "{{ env_var('DBT_USER') }}"
+      warehouse: COMPUTE_WH
+
     prod:
-      account: WGZXPME-SR81436
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
       auth_type: password
       client_session_keep_alive: false
       connect_retries: 3
       connect_timeout: 30
       database: AIRBNB
-      password: Ramyanikhitha@123
+      password: "{{ env_var('DBT_PASSWORD') }}"
       retry_on_database_errors: true
       role: ACCOUNTADMIN
       schema: PROD
       threads: 4
       type: snowflake
-      user: Ramya
-      warehouse: COMPUTE_WH  
-  target: default
+      user: "{{ env_var('DBT_USER') }}"
+      warehouse: COMPUTE_WH
+
+  target: prod
