@@ -1,0 +1,33 @@
+user:
+  outputs:
+    default:
+      account: WGZXPME-SR81436
+      auth_type: password
+      client_session_keep_alive: false
+      connect_retries: 3
+      connect_timeout: 30
+      database: AIRBNB
+      password: Ramyanikhitha@123
+      retry_on_database_errors: true
+      role: ACCOUNTADMIN
+      schema: Dev
+      threads: 4
+      type: snowflake
+      user: Ramya
+      warehouse: COMPUTE_WH 
+    prod:
+      account: WGZXPME-SR81436
+      auth_type: password
+      client_session_keep_alive: false
+      connect_retries: 3
+      connect_timeout: 30
+      database: AIRBNB
+      password: Ramyanikhitha@123
+      retry_on_database_errors: true
+      role: ACCOUNTADMIN
+      schema: PROD
+      threads: 4
+      type: snowflake
+      user: Ramya
+      warehouse: COMPUTE_WH  
+  target: default
