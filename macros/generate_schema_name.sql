@@ -1,7 +1,14 @@
 {% macro generate_schema_name(custom_schema_name, node) -%}
-    {%- if custom_schema_name is not none -%}
-        {{ custom_schema_name | trim | upper }}
-    {%- else -%}
-        {{ target.schema | trim | upper }}
-    {%- endif -%}
+
+  {% set custom_schema_name_cleansed = custom_schema_name | trim | upper %}
+  {% set target_schema_cleansed = target.schema | trim | upper %}
+
+  {% if custom_schema_name is none %}
+      {{ target_schema_cleansed }}
+  {% elif target_schema_cleansed == 'PROD' %}
+      {{ custom_schema_name_cleansed }}
+  {% else %}
+      {{ target_schema_cleansed }}_{{ custom_schema_name_cleansed }}
+  {% endif %}
+
 {%- endmacro %}
